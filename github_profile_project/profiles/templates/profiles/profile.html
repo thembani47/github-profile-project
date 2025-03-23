@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ user_profile.username }}'s Profile</title>
+</head>
+<body>
+    <h1>{{ user_profile.name }}</h1>
+    {% if user_profile.profile_picture %}
+        <img src="{{ user_profile.profile_picture }}" alt="Profile Picture" style="max-width: 200px;">
+    {% endif %}
+    <p><strong>Username:</strong> {{ user_profile.username }}</p>
+    {% if user_profile.bio %}
+        <p><strong>Bio:</strong> {{ user_profile.bio }}</p>
+    {% endif %}
+    {% if user_profile.location %}
+        <p><strong>Location:</strong> {{ user_profile.location }}</p>
+    {% endif %}
+    {% if user_profile.website %}
+        <p><strong>Website:</strong> <a href="{{ user_profile.website }}">{{ user_profile.website }}</a></p>
+    {% endif %}
+    {% if user_profile.github_url %}
+        <p><strong>GitHub:</strong> <a href="{{ user_profile.github_url }}">{{ user_profile.github_url }}</a></p>
+    {% endif %}
+    {% if user_profile.twitter_username %}
+        <p><strong>Twitter:</strong> <a href="https://twitter.com/{{ user_profile.twitter_username }}">@{{ user_profile.twitter_username }}</a></p>
+    {% endif %}
+
+    <h2>Repositories</h2>
+    <ul>
+        {% for repo in repositories %}
+            <li>
+                <a href="{{ repo.repo_url }}">{{ repo.name }}</a>
+                {% if repo.description %}
+                    <p>{{ repo.description }}</p>
+                {% endif %}
+                {% if repo.language %}
+                    <p>Language: {{ repo.language }}</p>
+                {% endif %}
+                <p>Stars: {{ repo.stars }}, Forks: {{ repo.forks }}</p>
+            </li>
+        {% empty %}
+            <li>No repositories found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
